@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Rock Paper Scissors</title>
+	</head>
+
+	<body>
+		<script>
+			// Prompt player for their hand & check their selection
+			let playerSelection = null;
+
+			do {
+				if (playerSelection === null) {
+					playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
+					playerSelection = checkPlayerInput(playerSelection);
+				}
+			}
+			while (playerSelection != "ROCK" || "PAPER" || "SCISSORS");
+			
+			// Play ONE round of Rock, Paper, Scissors
+			function playRound(playerSelection, computerSelection) {
+				if (playerSelection == computerSelection) {
+					console.log("Draw!");
+				}
+				else if (playerSelection == "ROCK" && computerSelection == "SCISSORS") {
+					playerScore ++;
+					console.log("You Win!");
+				}
+				else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
+					playerScore ++;
+					console.log("You Win!");
+				}
+				else if (playerSelection == "SCISSORS" && computerSelection == "PAPER") {
+					playerScore ++;
+					console.log("You Win!");
+				}
+				else {
+					computerScore ++;
+					console.log("You Lose! " + computerSelection + " beats " + playerSelection + "."); 
+				}
+			}
+
+			// Check player input
+			function checkPlayerInput(playerSelection) {
+				const playerHand = playerSelection.toUpperCase();
+				
+				if (playerHand == "ROCK" || "PAPER" || "SCISSORS") {
+					return playerHand;
+				}
+				else {
+					alert("Incorrect entry. Please try again.")
+					playerHand = null;
+					return playerHand;
+				}
+			}
+
+			// Randomly select computer's hand: Rock, Paper, or Scissors
+			function computerPlay() {
+				const computerHand = getRandomInt(3);
+				switch (computerHand) {
+					case '0':
+						computerHand = "ROCK";
+						break;
+					case '1':
+						computerHand = "PAPER";
+						break;
+					case '2':
+						computerHand = "SCISSORS"
+						break;
+				}
+				return computerHand;
+			}
+			
+			// Integer version of Math.random(): Copied from Mozilla MDN
+			function getRandomInt(max) {
+				return Math.floor(Math.random() * Math.floor(max));
+			}
+		</script>
+	</body>
+</html>
