@@ -13,17 +13,26 @@
 			let playerScore = 0;
 			let computerScore = 0;
 
-			// Prompt player for their hand & check their selection
-			do {
-				playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
-				playerSelection = checkPlayerInput(playerSelection);
+			// Play 'X'  rounds of Rock, Paper, Scissors
+			game(5);
+
+			function game(maxRounds) {
+				let i = 0;
+				while (i < maxRounds) {
+					// Prompt player for their hand & check their selection
+					do {
+						playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
+						playerSelection = checkPlayerInput(playerSelection);
+						computerSelection = computerPlay();
+					}
+				while (playerSelection === null);
+					playRound(playerSelection, computerSelection);
+					i++;
+				}
+				console.log("Player Score: " + playerScore + "   Computer Score: " + computerScore);
 			}
-			while (playerSelection === null);
 			
 			// Play ONE round of Rock, Paper, Scissors
-			computerSelection = computerPlay();
-			playRound(playerSelection, computerSelection);
-
 			function playRound(playerSelection, computerSelection) {
 				if (playerSelection == computerSelection) {
 					console.log("Draw!");
@@ -61,6 +70,7 @@
 						break;
 					default:
 						playerHand = null;
+						alert("Invalid Move! Choose: Rock, Paper, or Scissors");
 						return playerHand;
 						break;
 				}
