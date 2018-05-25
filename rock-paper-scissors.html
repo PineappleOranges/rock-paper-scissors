@@ -7,18 +7,23 @@
 
 	<body>
 		<script>
-			// Prompt player for their hand & check their selection
+			// Initialize variables
 			let playerSelection = null;
+			let computerSelection = null;
+			let playerScore = 0;
+			let computerScore = 0;
 
+			// Prompt player for their hand & check their selection
 			do {
-				if (playerSelection === null) {
-					playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
-					playerSelection = checkPlayerInput(playerSelection);
-				}
+				playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
+				playerSelection = checkPlayerInput(playerSelection);
 			}
-			while (playerSelection != "ROCK" || "PAPER" || "SCISSORS");
+			while (playerSelection === null);
 			
 			// Play ONE round of Rock, Paper, Scissors
+			computerSelection = computerPlay();
+			playRound(playerSelection, computerSelection);
+
 			function playRound(playerSelection, computerSelection) {
 				if (playerSelection == computerSelection) {
 					console.log("Draw!");
@@ -43,30 +48,36 @@
 
 			// Check player input
 			function checkPlayerInput(playerSelection) {
-				const playerHand = playerSelection.toUpperCase();
-				
-				if (playerHand == "ROCK" || "PAPER" || "SCISSORS") {
-					return playerHand;
-				}
-				else {
-					alert("Incorrect entry. Please try again.")
-					playerHand = null;
-					return playerHand;
+				let playerHand = playerSelection.toUpperCase();
+				switch (playerHand) {
+					case "ROCK":
+						return playerHand;
+						break;
+					case "PAPER":
+						return playerHand;
+						break;
+					case "SCISSORS":
+						return playerHand;
+						break;
+					default:
+						playerHand = null;
+						return playerHand;
+						break;
 				}
 			}
 
 			// Randomly select computer's hand: Rock, Paper, or Scissors
 			function computerPlay() {
-				const computerHand = getRandomInt(3);
+				let computerHand = getRandomInt(3);
 				switch (computerHand) {
-					case '0':
+					case 0:
 						computerHand = "ROCK";
 						break;
-					case '1':
+					case 1:
 						computerHand = "PAPER";
 						break;
-					case '2':
-						computerHand = "SCISSORS"
+					case 2:
+						computerHand = "SCISSORS";
 						break;
 				}
 				return computerHand;
