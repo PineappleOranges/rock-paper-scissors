@@ -6,97 +6,15 @@
 	</head>
 
 	<body>
-		<script>
-			// Initialize variables
-			let playerSelection = null;
-			let computerSelection = null;
-			let playerScore = 0;
-			let computerScore = 0;
+		<div id="container">
+			<div id="content">
+				<h1>Rock - Paper - Scissors</h1>
+				<button id="ROCK">Rock</button>
+				<button id="PAPER">Paper</button>
+				<button id="SCISSORS">Scissors</button>
+			</div>
+		</div>
+		<script text/javascript src='game.functions.js'></script>
 
-			// Play 'X'  rounds of Rock, Paper, Scissors
-			game(5);
-
-			function game(maxRounds) {
-				let i = 0;
-				while (i < maxRounds) {
-					// Prompt player for their hand & check their selection
-					do {
-						playerSelection = prompt('Type one of the following: "Rock", "Paper", "Scissors"', undefined);
-						playerSelection = checkPlayerInput(playerSelection);
-						computerSelection = computerPlay();
-					}
-				while (playerSelection === null);
-					playRound(playerSelection, computerSelection);
-					i++;
-				}
-				console.log("Player Score: " + playerScore + "   Computer Score: " + computerScore);
-			}
-			
-			// Play ONE round of Rock, Paper, Scissors
-			function playRound(playerSelection, computerSelection) {
-				if (playerSelection == computerSelection) {
-					console.log("Draw!");
-				}
-				else if (playerSelection == "ROCK" && computerSelection == "SCISSORS") {
-					playerScore ++;
-					console.log("You Win!");
-				}
-				else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
-					playerScore ++;
-					console.log("You Win!");
-				}
-				else if (playerSelection == "SCISSORS" && computerSelection == "PAPER") {
-					playerScore ++;
-					console.log("You Win!");
-				}
-				else {
-					computerScore ++;
-					console.log("You Lose! " + computerSelection + " beats " + playerSelection + "."); 
-				}
-			}
-
-			// Check player input
-			function checkPlayerInput(playerSelection) {
-				let playerHand = playerSelection.toUpperCase();
-				switch (playerHand) {
-					case "ROCK":
-						return playerHand;
-						break;
-					case "PAPER":
-						return playerHand;
-						break;
-					case "SCISSORS":
-						return playerHand;
-						break;
-					default:
-						playerHand = null;
-						alert("Invalid Move! Choose: Rock, Paper, or Scissors");
-						return playerHand;
-						break;
-				}
-			}
-
-			// Randomly select computer's hand: Rock, Paper, or Scissors
-			function computerPlay() {
-				let computerHand = getRandomInt(3);
-				switch (computerHand) {
-					case 0:
-						computerHand = "ROCK";
-						break;
-					case 1:
-						computerHand = "PAPER";
-						break;
-					case 2:
-						computerHand = "SCISSORS";
-						break;
-				}
-				return computerHand;
-			}
-			
-			// Integer version of Math.random(): Copied from Mozilla MDN
-			function getRandomInt(max) {
-				return Math.floor(Math.random() * Math.floor(max));
-			}
-		</script>
 	</body>
 </html>
