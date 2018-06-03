@@ -2,44 +2,48 @@ let playerSelection = null;
 let computerSelection = null;
 let playerScore = 0;
 let computerScore = 0;
+// Manipulating DOM for scorekeeping
+const score = document.querySelector('#score');
 
-const content = document.querySelector('#content');
-const roundResults = document.createElement('h4');
-roundResults.textContent = "Player Score: " + playerScore + "  Computer Score: " + computerScore;
-content.appendChild(roundResults);
+const currentPlayerScore = document.createElement('h2');
+currentPlayerScore.textContent = `Player: ${playerScore}`;
+score.appendChild(currentPlayerScore);
 
-const roundHands = document.createElement('h1'); 
-roundHands.textContent = "Select your hand. First to 5 points is the winner!"
-content.appendChild(roundHands);
+const currentComputerScore = document.createElement('h2');
+currentComputerScore.textContent = `Computer: ${computerScore}`;
+score.appendChild(currentComputerScore);
+
+// Manipulating DOM for round results
+const roundResults = document.querySelector('#roundResults');
+const currentRoundResults = document.createElement('h3');
+currentRoundResults.textContent = "Select a hand to start. First to 5 is the winner."
+roundResults.appendChild(currentRoundResults);
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
 	button.addEventListener('click', (e) => {
-		playerSelection = button.id;
-		computerSelection = computerPlay();
-		roundHands.textContent = game();
-		content.appendChild(roundHands);
-		roundResults.textContent = "Player Score: " + playerScore + "  Computer Score: " + computerScore;
-		content.appendChild(roundResults);
-		if (playerScore == 0 && computerScore == 0) {
-			roundHands.textContent = "Select your hand. First to 5 points is the winner!"
-			content.appendChild(roundHands);
-		}
+		currentRoundResults.textContent = `${playRound(button.id, computerPlay())}`;
+		roundResults.appendChild(currentRoundResults);
+
+		currentPlayerScore.textContent = `Player: ${playerScore}`;
+		score.appendChild(currentPlayerScore);
+		currentComputerScore.textContent = `Computer: ${computerScore}`;
+		score.appendChild(currentComputerScore);
+
+		game();
 	});
 });
 
 function game() {
-	const roundResult = playRound(playerSelection, computerSelection);
 	if (playerScore == 5) {
-		alert("You win!");
+		alert("You beat the computer!");
 		playerScore = 0;
 		computerScore = 0;
 	} else if (computerScore == 5) {
-		alert("You lose.");
+		alert("You lost against a computer.");
 		playerScore = 0;
 		computerScore = 0;
 	}
-	return roundResult;
 }
 
 function playRound(playerSelection, computerSelection) {
